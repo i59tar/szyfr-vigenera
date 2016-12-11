@@ -10,6 +10,9 @@ Szyfr Vigenere'a. Język - C/C++
 - 	    Przeprowadza szyfrowanie/rozszyfrowanie względem spreparowanego klucza
 - 	    Zapisuje nowy tekst i nowy klucz w plikach tekstowych.
 
+Version 0.2:
+- Przetworzono algorytm kodowania. Do tej pory on korzystał z autoklucza (klucz uzupełniany później samym tekstem)
+
 
 Funkcjonalność do uzupełnienia:
 

@@ -28,12 +28,12 @@ else{
 		cout<<"Nie powiodlo sie wczytywanie klucza"<<endl;
 		return 1;
 	}
-	string cardano ((istreambuf_iterator<char>(klucz)), istreambuf_iterator<char>());
-	cardano = crypto_prep(cardano);
+	string vigenere ((istreambuf_iterator<char>(klucz)), istreambuf_iterator<char>());
+	vigenere = crypto_prep(vigenere);
 //wczytywanie klucza szyfrujacego			
-	if(cardano.length()<tresc.length()) cardano.append(tresc);
-	cardano.erase(tresc.length(),(cardano.length()-tresc.length()));			
-	cout<<cardano<<endl;
+	while(vigenere.length()<tresc.length()) vigenere.append(vigenere);
+	vigenere.erase(tresc.length(),(vigenere.length()-tresc.length()));			
+	cout<<vigenere<<endl;
 //roszserzenie klucza, aby obejmowal calosc tresci
 	if (argc==3){
 		cout<<"Czy chcesz zaszyfrowac czy rozszyfrowac tekst? 'encr'/'decr'"<<endl;
@@ -45,17 +45,15 @@ else{
 	tekst.open(argv[1], std::fstream::out | std::fstream::trunc);
 	if(tryb[0]=='e' || tryb[0]=='s' || tryb[0]=='z'){
 		//pierwsze litery slow "encrypt" || "szyfruj" || "zaszyfruj"
-		tresc = szyfr(tresc, cardano,"encr");
+		tresc = szyfr(tresc, vigenere,"encr");
  		cout<<"Tekst zostal zaszyfrowany. Oto efekt: "<<endl<<tresc<<endl;
 		tekst<<tresc;
 		klucz.close();
-		klucz.open(argv[2], std::fstream::out | std::fstream::trunc);
-		klucz<<cardano;
 		tekst.close();
 		}
 	else if(tryb[0]=='d' ||tryb[0]=='o' || tryb[0]=='r'){
 		//pierwsze litery slow "decrypt" || "odszyfruj" || "rozszyfruj"
-		tresc = szyfr(tresc, cardano, "decr");
+		tresc = szyfr(tresc, vigenere, "decr");
  		cout<<"Tekst zostal rozszyfrowany. Oto efekt: "<<endl<<tresc<<endl;
 		tekst<<tresc;
 		klucz.close();
